@@ -1,0 +1,26 @@
+{
+    "wx_menu":{
+        "button":[
+            {
+                "name":"菜单",
+                "sub_button":[
+                    {
+                        "type":"view",
+                        "name":"百度查询",
+                        "url":"http://www.baidu.com"
+                    }
+                ]
+            },
+            {
+                "name":"菜单2",
+                "sub_button":[
+                    {
+                        "type":"view",
+                        "name":"咨询前言",
+                        "url":"http://open.clife.cn/#/home"
+                    }
+                ]
+            }
+        ]
+    }
+}
