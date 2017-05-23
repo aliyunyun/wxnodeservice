@@ -12,7 +12,8 @@ module.exports = function(app, config) {
   var env = process.env.NODE_ENV || 'development';
   app.locals.ENV = env;
   app.locals.ENV_DEVELOPMENT = env == 'development';
-  
+  app.locals.rootPath = __dirname;
+
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
 
@@ -26,9 +27,6 @@ module.exports = function(app, config) {
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
-
-
-
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {

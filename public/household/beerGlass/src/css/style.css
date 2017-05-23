@@ -1,0 +1,89 @@
+@import url(../../../common/static/reset.css);
+@import url(../../../common/static/common.css);
+@import url(../../../common/static/mediaQuery.css);
+
+body{background:#EFEFF4;color:#323232;font-size:16px;}
+.hidden{display: none;}
+html,body,#ROOT,.main,.gameList{height:100%}
+.btn{display:block; width:80%;padding:16px 0;color:#fff;background:#1A9964;border-radius: 10px;text-align: center;margin:24px auto;}
+/* 活动 */
+.eventlist li{margin-top: 2.666667rem;border-top:1px solid #CACACB;}
+.eventlist li p:first-child{padding-left: 1.333333rem;}
+.eventlist li p{height:48px;line-height:48px;background:#fff;}
+.eventlist li .flex-cell{background:#1A9964;text-align: center;color:#fff;}
+.eventlist li span:first-child{border-right: 1px solid #fff;}
+ 
+.set-ul{margin-top:20px;border-top:1px solid #C6C6C6;border-bottom:1px solid #C6C6C6;background:#fff;}
+.set-ul li span:last-child,.set-ul a span:last-child,.set-ul input{font-size: 14px;color:#848484;position:absolute;right:15px;text-align: right;ime-mode:Disabled;}
+.set-ul li,.set-ul a{position: relative;margin-left:15px;height:48px;line-height:48px;display:block;color: #323232;}
+.set-ul li:not(:first-child),.set-ul a:not(:first-child){border-top:1px solid #C6C6C6; }
+.set-ul img{height:18px;width: 18px;    vertical-align: middle;}
+.mode-ul{position:fixed;bottom:0;background:#fff;width:100%;text-align: center;z-index: 101;}
+.mode-ul li{height:53px;line-height: 53px;position:relative;border-top:1px solid #C6C6C6;}
+.mode-ul img{width:20px;position:absolute;vertical-align:middle;right:16px;top: 18px;}
+.shadow{ 
+	position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    outline: 0;
+    -webkit-overflow-scrolling: touch;
+    background-color: rgba(0, 0, 0, 0.35); 
+    z-index: 100;
+}
+
+.sidebar{height:44px;width:100%;background:#1A9964;}
+.sidebar img{width: 24px;height:24px;margin:10px 0 0 16px;}
+.header{text-align: center;}
+.header img{width:68px;height:68px;margin:44px 0 12px 0 ;border:2px solid #e9e9e9;border-radius: 50%;}
+.user-info{background:#fff;height:100%;z-index: 101;width:70%;position:absolute;top:0;}
+.info-ul li{padding:16px;position: relative;}
+.info-ul li span{font-size: 14px;position: absolute;right: 16px;}
+.info-ul li div{display:inline-block;margin-left: 35px;}
+.info-ul li p:nth-child(2){font-size: 14px;color:#a9a9a9;}
+.cl-gray{color:#848484; top: 20px;}
+.cl-red{color:#ff3b30;top:30px;}
+.user-info .info-ul img{height: 24px;width: 24px;margin-right: 12px;position: absolute;}
+
+.qrcodeMain{height:400px; background:url('../img/bg-game.png')no-repeat;background-size: 100% 100%;text-align: center;font-size: 14px;}
+.qrcodeMain>p:nth-child(2){padding-top: 330px;}
+.qrcodeMain>p:nth-child(3){color:#848484;}
+.qrcodeMain .qrcodeImg{
+    width:202px;
+    height:202px;
+    position:absolute;
+    left:50%;
+    margin-left: -101px;
+     top: 16%;
+     display:block;
+     border:5px solid transparent;
+     border-image:url('../img/bg-border.png') 15;
+     -webkit-border-image:url('../img/bg-border.png') 15;
+}
+.qrcodeMain .qrcodeImg img{width:172px;height:172px;padding:14px;background: #fff;}
+
+.borderBox{margin:30px 16px; border:5px solid transparent;border-image: url('../img/bg-border.png') 15;-webkit-border-image:url('../img/bg-border.png') 15;border-radius: 10px;}
+.borderBox img{width:100%;}
+.borderBox .content{padding:20px 12px 0px;background:#fff;}
+.borderBox .content p:first-child{color:#848484;}
+.borderBox .content p:nth-child(2){
+    text-indent: 30px;
+    font-size: 14px;  
+    margin-top: 20px;
+    line-height: 25px;
+}
+.borderShadow{ box-shadow: 0px 6px #E6E6EB;}   
+
+
+.rank .borderBox{margin:20px 16px;}
+.rank .btn{border-radius:0;margin:0;}
+.rank .btn:first-child{border-right: 1px solid #fff;}
+.rank-header{background:#fff;padding:50px 16px;position:relative;}
+.rank-header ul{width:60%;line-height: 25px;}
+.rank-header img{position:absolute;top:20px;right:16px; height:104px;width:104px;}
+.rank-ul{text-align: center;margin-bottom: 60px;}
+.rank-ul li{height:48px;line-height: 48px;}
+.rank-ul li:not(:first-child){border-top:1px solid #DCDCDC;font-size: 14px;background:#fff;}
+.rank footer{position:fixed;bottom:0;width:100%}
