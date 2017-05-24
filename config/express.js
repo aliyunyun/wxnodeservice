@@ -14,6 +14,7 @@ module.exports = function(app, config) {
   app.locals.ENV_DEVELOPMENT = env == 'development';
   app.locals.rootPath = __dirname;
 
+
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
 
@@ -33,7 +34,6 @@ module.exports = function(app, config) {
     require(controller)(app);
   });
 
-//  app.use('/', home);
 
   app.use(function (req, res, next) {
     var err = new Error('Not Found');

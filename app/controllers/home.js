@@ -23,8 +23,10 @@ module.exports = function (app) {
 
 router.get('/', function (req, res, next) {
   // var articles = [new Article(), new Article()];
-    res.render('index', {
-      title: 'Generator-Express MVC'
+
+    console.log("收到根目录");
+    res.render('index',{
+      "title":"小俏"
     });
    // res.sendFile('../../public/img/logo.png')
 
@@ -40,11 +42,53 @@ router.get('/getInfo',function(req,res){
   //  res.render('index');
 
   // res.sendFile(path.join("/Users/yuanyunlong/Documents/node/wxwechat/public",'error.html'));
- res.render('index', {
-      title: 'getInfo'
-    });
+ res.render('index');
 
 })
+
+router.post('/jssdk/sign', function(req, res){  
+    console.log("i get the jssdk sign");
+   	// api.getTicket(function(err, result){
+    //         if(err){
+    //             console.log("get ticket error");
+    //         }else{
+    //             console.dir("get ticket:" + JSON.stringify(result));
+                
+    //             res.send(JSON.stringify(result));
+    //         }
+    //    });
+
+
+    var param = {
+        debug:false,
+        jsApiList:[  'openWXDeviceLib',
+                     'onMenuShareAppMessage',
+                     'getWXDeviceInfos',
+                     'sendDataToWXDevice',
+                     'startScanWXDevice',
+                     'stopScanWXDevice',
+                     'connectWXDevice',
+                     'disconnectWXDevice',
+                     'getWXDeviceTicket',
+                     'onWXDeviceBindStateChange',
+                     'onWXDeviceStateChange',
+                     'onReceiveDataFromWXDevice',
+                     'onScanWXDeviceResult',
+                     'onWXDeviceBluetoothStateChange'
+                            
+                            ],
+        url:req.body.url
+    };
+    api.getJsConfig(param, function(err, result){
+                 if(err){
+                console.log("get ticket error");
+            }else{
+                console.dir("get ticket:" + JSON.stringify(result));
+                
+                res.send(result);
+            }
+    });
+});
 
 
 router.get('/createMenu',function(req, res){

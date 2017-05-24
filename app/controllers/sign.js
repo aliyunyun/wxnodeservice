@@ -2,11 +2,59 @@ var express = require('express'),
   router = express.Router(),
   wechat = require("wechat"),
   wechatConfig = require("../../config/wechatInfo");
- 
+
+var WechatAPI = require('wechat-api');
+var api = new WechatAPI(wechatConfig.infoList.appid, wechatConfig.infoList.appsecret);
+
+
 
 module.exports = function (app) {
   app.use('/wechat', router);
 };
+
+router.post('/jssdk/sign', function(req, res){  
+    console.log("i get the jssdk sign");
+   	// api.getTicket(function(err, result){
+    //         if(err){
+    //             console.log("get ticket error");
+    //         }else{
+    //             console.dir("get ticket:" + JSON.stringify(result));
+                
+    //             res.send(JSON.stringify(result));
+    //         }
+    //    });
+
+
+    var param = {
+        debug:false,
+        jsApiList:[  'openWXDeviceLib',
+                     'onMenuShareAppMessage',
+                     'getWXDeviceInfos',
+                     'sendDataToWXDevice',
+                     'startScanWXDevice',
+                     'stopScanWXDevice',
+                     'connectWXDevice',
+                     'disconnectWXDevice',
+                     'getWXDeviceTicket',
+                     'onWXDeviceBindStateChange',
+                     'onWXDeviceStateChange',
+                     'onReceiveDataFromWXDevice',
+                     'onScanWXDeviceResult',
+                     'onWXDeviceBluetoothStateChange'
+                            
+                            ],
+        url:req.body.url
+    };
+    api.getJsConfig(param, function(err, result){
+                 if(err){
+                console.log("get ticket error");
+            }else{
+                console.dir("get ticket:" + JSON.stringify(result));
+                
+                res.send(result);
+            }
+    });
+});
 
 router.get('/',    wechat(wechatConfig.infoList,wechat.text(function(message, req, res,next){
         console.log("start !!!");
