@@ -25,9 +25,10 @@ router.get('/', function (req, res, next) {
   // var articles = [new Article(), new Article()];
 
     console.log("收到根目录");
-    res.render('index',{
-      "title":"小俏"
-    });
+    res.render('index');
+
+
+   // res.render("hello");
    // res.sendFile('../../public/img/logo.png')
 
   // res.render(path.join(__dirname,'index.html'));
@@ -46,8 +47,21 @@ router.get('/getInfo',function(req,res){
 
 })
 
+
+
+
+router.get('/createMenu',function(req, res){
+
+  console.log("men_config:" + men_config);
+
+  api.createMenu(men_config,function(err, data){
+    console.dir(data);
+  });
+
+});
+
 router.post('/jssdk/sign', function(req, res){  
-    console.log("i get the jssdk sign");
+    console.log("i get the jssdk sign post");
    	// api.getTicket(function(err, result){
     //         if(err){
     //             console.log("get ticket error");
@@ -57,6 +71,7 @@ router.post('/jssdk/sign', function(req, res){
     //             res.send(JSON.stringify(result));
     //         }
     //    });
+
 
 
     var param = {
@@ -74,31 +89,22 @@ router.post('/jssdk/sign', function(req, res){
                      'onWXDeviceStateChange',
                      'onReceiveDataFromWXDevice',
                      'onScanWXDeviceResult',
-                     'onWXDeviceBluetoothStateChange'
+                     'onWXDeviceBluetoothStateChange',
+                     'chooseImage',
+                     'checkJsApi',
                             
                             ],
         url:req.body.url
     };
+
     api.getJsConfig(param, function(err, result){
-                 if(err){
+            if(err){
                 console.log("get ticket error");
+                res.send(err);
             }else{
                 console.dir("get ticket:" + JSON.stringify(result));
-                
                 res.send(result);
             }
     });
 });
-
-
-router.get('/createMenu',function(req, res){
-
-  console.log("men_config:" + men_config);
-
-  api.createMenu(men_config,function(err, data){
-    console.dir(data);
-  });
-
-});
-
 

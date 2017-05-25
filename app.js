@@ -6,7 +6,10 @@ var express = require('express'),
 var app = express();
 
 //设置跨域访问
-app.all('*', function(req, res, next) {
+app.all('/wechat/*', function(req, res, next) {
+
+    console.log("receive wechat ");
+
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
@@ -14,6 +17,15 @@ app.all('*', function(req, res, next) {
     res.header("Content-Type", "application/json;charset=utf-8");
     next();
 });
+
+
+app.all('*', function(req, res, next){
+     // Disable caching for content files
+    res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header("Pragma", "no-cache");
+    res.header("Expires", 0);
+    next();
+})
 
 module.exports = require('./config/express')(app, config);
 

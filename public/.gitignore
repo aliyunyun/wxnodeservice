@@ -1,0 +1,15 @@
+_Store
+*/Pods
+*/Podfile.lock
+*/xcuserdata
+*/build
+*.iml
+bin/
+build
+/gradle
+.classpath
+.project
+.settings
+/gen
+/node_modules
+

@@ -73,11 +73,19 @@
 
 	var _inherits3 = _interopRequireDefault(_inherits2);
 
-	var _BaseComponentClass = __webpack_require__(88);
+	var _typeof2 = __webpack_require__(34);
 
-	var _Actions = __webpack_require__(90);
+	var _typeof3 = _interopRequireDefault(_typeof2);
 
-	var _Store = __webpack_require__(91);
+	var _stringify = __webpack_require__(88);
+
+	var _stringify2 = _interopRequireDefault(_stringify);
+
+	var _BaseComponentClass = __webpack_require__(90);
+
+	var _Actions = __webpack_require__(92);
+
+	var _Store = __webpack_require__(93);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -97,34 +105,61 @@
 	    // });
 
 	    // 配置微信
-	    // het.post({
-	    //         url: Path.wPath+'/wechat/jssdk/sign',
-	    //         data: 'format=json&url='+encodeURIComponent(location.href.split('#')[0]),
-	    //         async:false,
-	    //         success: function(data,status,xhr){
-	    //             if(typeof data == 'string'){
-	    //                 data = JSON.parse(data);
-	    //             }
-	    //             var code = data.code;
-	    //             var jsonData = data.data;
-	    //             if(status == "success" && code == 0){
-	    //                 wx.config({
-	    //                     debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-	    //                     appId: jsonData.appId, // 必填，公众号的唯一标识
-	    //                     timestamp: jsonData.timestamp, // 必填，生成签名的时间戳
-	    //                     nonceStr: jsonData.nonceStr, // 必填，生成签名的随机串
-	    //                     signature: jsonData.signature,// 必填，签名，见附录1
-	    //                     jsApiList: ['scanQRCode','onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-	    //                 });
-	    //                 sessionStorage.appid = jsonData.appId;
-	    //                 // wx.ready(function(){
-	    //                 // });
-	    //                 // wx.error(function(res){
-	    //                 //  alert(res.errMsg);
-	    //                 // });
-	    //             }
-	    //         }
-	    //     });
+	    var url = "http://a01e3c42.ngrok.io" + '/wechat/jssdk/sign';
+
+	    var path = location.href.split('#')[0];
+
+	    console.log("path:  " + path);
+
+	    var data = { url: path };
+
+	    console.log("dom ready");
+
+	    het.post(url, data, function (data, status) {
+
+	        console.log("success hahahah: " + (0, _stringify2.default)(data));
+	        // alert("success hahahah:"  + JSON.stringify(data));
+	        if (typeof data == 'string') {
+	            data = JSON.parse(data);
+	        }true;
+	        var code = data.code;
+	        var jsonData = data;
+	        console.log(typeof data === 'undefined' ? 'undefined' : (0, _typeof3.default)(data), 'typeof data');
+
+	        wx.config({
+	            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	            appId: jsonData.appId, // 必填，公众号的唯一标识
+	            timestamp: jsonData.timestamp, // 必填，生成签名的时间戳
+	            nonceStr: jsonData.nonceStr, // 必填，生成签名的随机串
+	            signature: jsonData.signature, // 必填，签名，见附录1
+	            jsApiList: ['ready', 'error', 'openWXDeviceLib', 'onMenuShareAppMessage', 'getWXDeviceInfos', 'sendDataToWXDevice', 'startScanWXDevice', 'stopScanWXDevice', 'connectWXDevice', 'disconnectWXDevice', 'getWXDeviceTicket', 'onWXDeviceBindStateChange', 'onWXDeviceStateChange', 'onReceiveDataFromWXDevice', 'onScanWXDeviceResult', 'onWXDeviceBluetoothStateChange', 'chooseImage', 'getLocation'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	        });
+	        sessionStorage.appid = jsonData.appId;
+	        // wx.ready(function(){
+	        // });
+	        // wx.error(function(res){
+	        //  alert(res.errMsg);
+
+	        // });
+
+	        // }
+	    }, function (msg) {
+	        alert("req failed:" + msg);
+	    });
+	});
+
+	wx.ready(function () {
+	    alert("wx 先休息 ready");
+	    // 初始化设备库函数
+	    wx.invoke('openWXDeviceLib', { 'connType': 'blue' }, function (res) {
+	        console.log("openWXDeviceLib : " + (0, _stringify2.default)(res));
+	        alert("openWXDeviceLib " + +(0, _stringify2.default)(res));
+	    });
+	});
+
+	//微信系统错误
+	wx.error(function (res) {
+	    alert("微信错误:" + (0, _stringify2.default)(res));
 	});
 
 	// 接收app推送数据
@@ -151,14 +186,67 @@
 	        key: 'handleTouchTap',
 	        value: function handleTouchTap(e) {
 	            console.log('touchTap事件测试');
+
+	            // alert("touchTap事件测试 ");
+
+	            wx.getLocation({
+	                type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+	                success: function success(res) {
+	                    var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
+	                    var longitude = res.longitude; // 经度，浮点数，范围为180 ~ -180。
+	                    var speed = res.speed; // 速度，以米/每秒计
+	                    var accuracy = res.accuracy; // 位置精度
+
+	                    console.log("getLocation:" + (0, _stringify2.default)(res));
+	                }
+	            });
 	        }
+	    }, {
+	        key: 'handleTouchTap1',
+	        value: function handleTouchTap1(e) {
+	            console.log('touchTap事件测试');
+
+	            // alert("touchTap事件测试 ");
+
+	            //监听扫描未绑定设备返回数据
+	            wx.checkJsApi({
+	                jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+	                success: function success(res) {
+	                    // 以键值对的形式返回，可用的api值true，不可用为false
+	                    // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+
+	                    console.log("checkJsApi res:" + (0, _stringify2.default)(res));
+
+	                    wx.chooseImage({
+	                        success: function success(res) {
+	                            alert('已选择 ' + res.localIds.length + ' 张图片');
+	                        }
+	                    });
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {}
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            console.log("app render");
+
 	            return React.createElement(
 	                'div',
-	                { onTouchTap: this.handleTouchTap.bind(this) },
-	                ' \u6B22\u8FCE\u6765\u5230\u5C0F\u4FCF\u84DD\u7259\u7684\u63A7\u5236\u754C\u9762\u3002'
+	                null,
+	                React.createElement(
+	                    'div',
+	                    { onTouchTap: this.handleTouchTap.bind(this) },
+	                    '\u70B9\u62111'
+	                ),
+	                React.createElement(
+	                    'div',
+	                    { onTouchTap: this.handleTouchTap1.bind(this), style: {
+	                            paddingTop: '30px' } },
+	                    '\u70B9\u62112'
+	                )
 	            );
 	        }
 	    }]);
@@ -1715,13 +1803,29 @@
 /* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = { "default": __webpack_require__(89), __esModule: true };
+
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(15)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 90 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 
-	var _BaseComponentClass = __webpack_require__(89);
+	var _BaseComponentClass = __webpack_require__(91);
 
 	Object.defineProperty(exports, 'BaseComponent', {
 	  enumerable: true,
@@ -1731,7 +1835,7 @@
 	});
 
 /***/ },
-/* 89 */
+/* 91 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1848,7 +1952,7 @@
 	;
 
 /***/ },
-/* 90 */
+/* 92 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1863,7 +1967,7 @@
 	var Actions = exports.Actions = Reflux.createActions(['repaint']);
 
 /***/ },
-/* 91 */
+/* 93 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1878,7 +1982,7 @@
 	});
 	exports.Store = undefined;
 
-	var _Actions = __webpack_require__(90);
+	var _Actions = __webpack_require__(92);
 
 	var Store = exports.Store = Reflux.createStore({
 	    listenables: [_Actions.Actions],
