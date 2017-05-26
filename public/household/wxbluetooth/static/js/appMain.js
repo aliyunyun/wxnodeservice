@@ -204,6 +204,11 @@
 	                    React.createElement(
 	                        'div',
 	                        { onTouchTap: this.handleTouchTap.bind(this) },
+	                        ' \u8FD9\u91CC\u662Freact\u7684\u9875\u9762'
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { onTouchTap: this.handleTouchTap.bind(this), style: { paddingTop: '20px' } },
 	                        ' \u6D4B\u8BD5button\u62CD\u7167'
 	                    )
 	                )
