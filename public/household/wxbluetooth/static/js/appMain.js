@@ -101,7 +101,7 @@
 	    // });
 
 	    // 配置微信
-	    var url = "http://a01e3c42.ngrok.io" + '/wechat/jssdk/sign';
+	    var url = "http://4690782d.ngrok.io" + '/wechat/jssdk/sign';
 	    var data = location.href.split('#')[0];
 
 	    console.log("dom ready");
@@ -112,7 +112,7 @@
 	        //console.log("success hahahah: " + data);
 	        alert("success hahahah:" + data + " status:" + status);
 	        if (typeof data == 'string') {
-	            data = JSON.parse(data);
+	            data = JSON.parse(data);pwd;
 	        }
 	        var code = data.code;
 	        var jsonData = data.data;
@@ -194,7 +194,7 @@
 	            return React.createElement(
 	                'div',
 	                { onTouchTap: this.handleTouchTap.bind(this) },
-	                ' \u6B22\u8FCE\u6765\u5230\u5C0F\u4FCF\u84DD\u7259\u7684\u63A7\u5236\u754C\u9762 --- react\u3002'
+	                '\u4F60\u597D\u5C0F\u658C\uFF0C\u6B22\u8FCE\u6765\u5230YY\u7684\u7F51\u7AD9\u3002'
 	            );
 	        }
 	    }]);
