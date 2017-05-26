@@ -121,7 +121,7 @@
 	            timestamp: jsonData.timestamp, // 必填，生成签名的时间戳
 	            nonceStr: jsonData.nonceStr, // 必填，生成签名的随机串
 	            signature: jsonData.signature, // 必填，签名，见附录1
-	            jsApiList: ['openWXDeviceLib', 'onMenuShareAppMessage', 'getWXDeviceInfos', 'sendDataToWXDevice', 'startScanWXDevice', 'stopScanWXDevice', 'connectWXDevice', 'disconnectWXDevice', 'getWXDeviceTicket', 'onWXDeviceBindStateChange', 'onWXDeviceStateChange', 'onReceiveDataFromWXDevice', 'onScanWXDeviceResult', 'onWXDeviceBluetoothStateChange'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	            jsApiList: ['openWXDeviceLib', 'onMenuShareAppMessage', 'getWXDeviceInfos', 'sendDataToWXDevice', 'startScanWXDevice', 'stopScanWXDevice', 'connectWXDevice', 'disconnectWXDevice', 'getWXDeviceTicket', 'onWXDeviceBindStateChange', 'onWXDeviceStateChange', 'onReceiveDataFromWXDevice', 'onScanWXDeviceResult', 'onWXDeviceBluetoothStateChange', 'checkJsApi', 'chooseImage', 'invoke', 'on'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
 	        });
 	    }, function (msg) {
 	        alert("req failed:" + msg);
@@ -131,9 +131,22 @@
 	wx.ready(function () {
 
 	    // 初始化设备库函数
-	    wx.invoke('openWXDeviceLib', { 'connType': 'blue' }, function (res) {
+	    wx.invoke('openWXDeviceLib', { 'brandUserName': 'gh_b4ed57a5e824', 'connType': 'blue' }, function (res) {
 	        console.log("openWXDeviceLib : " + (0, _stringify2.default)(res));
 	        alert("openWXDeviceLib " + +(0, _stringify2.default)(res));
+	    });
+
+	    wx.on('onScanWXDeviceResult', function (res) {
+	        alert("onScanWXDeviceResult " + +(0, _stringify2.default)(res));
+	    });
+
+	    //手机蓝牙状态改变事件
+	    wx.on('onWXDeviceBluetoothStateChange', function (res) {
+	        alert("onWXDeviceBluetoothStateChange " + +(0, _stringify2.default)(res));
+	    });
+	    //设备绑定状态改变事件
+	    wx.on('onWXDeviceBindStateChange', function (res) {
+	        alert("onWXDeviceBindStateChange " + +(0, _stringify2.default)(res));
 	    });
 	});
 
@@ -166,8 +179,73 @@
 	        key: 'handleTouchTap',
 	        value: function handleTouchTap(e) {
 	            console.log('touchTap事件测试');
+	            wx.chooseImage({
+	                success: function success(res) {
+	                    images.localId = res.localIds;
+	                    alert('已选择 ' + res.localIds.length + ' 张图片');
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'chooseImage',
+	        value: function chooseImage(e) {
+	            console.log('touchTap事件测试');
+	            wx.chooseImage({
+	                success: function success(res) {
+	                    images.localId = res.localIds;
+	                    alert('已选择 ' + res.localIds.length + ' 张图片');
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'openWXDeviceLib',
+	        value: function openWXDeviceLib(e) {
+	            wx.openWXDeviceLib({ 'brandUserName': 'gh_b4ed57a5e824', 'connType': 'blue' }, function (res) {
+	                console.log("openWXDeviceLib : " + (0, _stringify2.default)(res));
+	                alert("openWXDeviceLib " + +(0, _stringify2.default)(res));
+	            });
+	        }
+	    }, {
+	        key: 'checkJsApi',
+	        value: function checkJsApi(e) {
+	            wx.checkJsApi({
+	                jsApiList: ['getNetworkType', 'previewImage'],
+	                success: function success(res) {
+	                    alert((0, _stringify2.default)(res));
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'getWXDeviceInfos',
+	        value: function getWXDeviceInfos(e) {
+	            wx.getWXDeviceInfos({
+	                success: function success(res) {
+	                    alert((0, _stringify2.default)(res));
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'startScanWXDevice',
+	        value: function startScanWXDevice(e) {
+	            // wx.startScanWXDevice({
+	            //     success: function (res) {
+	            //         alert(JSON.stringify(res));
+	            //     }
+	            // });
 
-	            alert("touchTap事件测试 ");
+	            wx.invoke('startScanWXDevice', { 'connType': 'blue' }, function (res) {
+
+	                alert((0, _stringify2.default)(res));
+	            });
+	        }
+	    }, {
+	        key: 'stopScanWXDevice',
+	        value: function stopScanWXDevice(e) {
+	            wx.stopScanWXDevice({
+	                success: function success(res) {
+	                    alert((0, _stringify2.default)(res));
+	                }
+	            });
 	        }
 	    }, {
 	        key: 'render',
@@ -187,8 +265,33 @@
 	                    ),
 	                    React.createElement(
 	                        'div',
-	                        { onTouchTap: this.handleTouchTap.bind(this), style: { paddingTop: '20px' } },
-	                        ' \u6D4B\u8BD5button\u62CD\u7167'
+	                        { onTouchTap: this.chooseImage.bind(this), style: { paddingTop: '30px' } },
+	                        ' chooseImage'
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { onTouchTap: this.checkJsApi.bind(this), style: { paddingTop: '30px' } },
+	                        ' checkJsApi'
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { onTouchTap: this.openWXDeviceLib.bind(this), style: { paddingTop: '30px' } },
+	                        ' openWXDeviceLib'
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { onTouchTap: this.getWXDeviceInfos.bind(this), style: { paddingTop: '30px' } },
+	                        ' getWXDeviceInfos'
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { onTouchTap: this.startScanWXDevice.bind(this), style: { paddingTop: '30px' } },
+	                        ' startScanWXDevice'
+	                    ),
+	                    React.createElement(
+	                        'div',
+	                        { onTouchTap: this.stopScanWXDevice.bind(this), style: { paddingTop: '30px' } },
+	                        ' stopScanWXDevice'
 	                    )
 	                )
 	            );

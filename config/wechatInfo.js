@@ -13,6 +13,6 @@ module.exports = {
 		appid: 'wx9711e8011e168fae',
 		appsecret: 'b94ee41b88c7ea99aa943cdd166c901c',
 		token:"abcdefg",
-		encodingAESKey:"5qk9AqCHF0UqqaeGgrOXXJkszZeEoUhggpgvdKhRBzP",
+		encodingAESKey:"de0QYVczVURHAjZ8ERpGQyBkIh8Cr96ZhoXsD9g24ky",
 	},
 }
