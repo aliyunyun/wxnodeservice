@@ -101,21 +101,22 @@
 	    // });
 
 	    // 配置微信
-	    var url = "http://4690782d.ngrok.io" + '/wechat/jssdk/sign';
-	    var data = location.href.split('#')[0];
+	    var url = "http://a01e3c42.ngrok.io" + '/wechat/jssdk/sign';
+	    var path = location.href.split('#')[0];
+
+	    console.log("path: " + path);
+	    var data = { url: path };
 
 	    console.log("dom ready");
-	    alert("het dom ready");
 
 	    het.post(url, data, function (data, status) {
 
 	        //console.log("success hahahah: " + data);
 	        alert("success hahahah:" + data + " status:" + status);
 	        if (typeof data == 'string') {
-	            data = JSON.parse(data);pwd;
+	            data = JSON.parse(data);
 	        }
-	        var code = data.code;
-	        var jsonData = data.data;
+	        var jsonData = data;
 
 	        wx.config({
 	            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
@@ -138,7 +139,6 @@
 
 	wx.ready(function () {
 
-	    alert("wx ready");
 	    // 初始化设备库函数
 	    wx.invoke('openWXDeviceLib', { 'connType': 'blue' }, function (res) {
 	        console.log("openWXDeviceLib : " + (0, _stringify2.default)(res));
@@ -182,7 +182,6 @@
 	        key: 'render',
 	        value: function render() {
 	            console.log("app render");
-	            alert("app render");
 
 	            return React.createElement(
 	                'div',
