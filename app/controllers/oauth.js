@@ -4,7 +4,6 @@
  */
 var express = require('express');
 var router = express.Router();
-var request = require('request');
  var wechatConfig = require("../../config/wechatInfo");
 /* 微信登陆 */
 var AppID = wechatConfig.infoList.appid;
