@@ -101,40 +101,52 @@
 	    // });
 
 	    // 配置微信
-	    var url = "http://a01e3c42.ngrok.io" + '/wechat/jssdk/sign';
-	    var path = location.href.split('#')[0];
 
-	    console.log("path: " + path);
-	    var data = { url: path };
-
-	    console.log("dom ready");
-
-	    het.post(url, data, function (data, status) {
-
-	        //console.log("success hahahah: " + data);
-	        alert("success hahahah:" + data + " status:" + status);
-	        if (typeof data == 'string') {
-	            data = JSON.parse(data);
-	        }
-	        var jsonData = data;
-
-	        wx.config({
-	            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-	            appId: jsonData.appId, // 必填，公众号的唯一标识
-	            timestamp: jsonData.timestamp, // 必填，生成签名的时间戳
-	            nonceStr: jsonData.nonceStr, // 必填，生成签名的随机串
-	            signature: jsonData.signature, // 必填，签名，见附录1
-	            jsApiList: ['openWXDeviceLib', 'onMenuShareAppMessage', 'getWXDeviceInfos', 'sendDataToWXDevice', 'startScanWXDevice', 'stopScanWXDevice', 'connectWXDevice', 'disconnectWXDevice', 'getWXDeviceTicket', 'onWXDeviceBindStateChange', 'onWXDeviceStateChange', 'onReceiveDataFromWXDevice', 'onScanWXDeviceResult', 'onWXDeviceBluetoothStateChange'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-	        });
-	        sessionStorage.appid = jsonData.appId;
-	        // wx.ready(function(){
-	        // });
-	        // wx.error(function(res){
-	        //  alert(res.errMsg);
-	        // });
-	    }, function (msg) {
-	        alert("req failed:" + msg);
-	    });
+	    // let url = "http://a01e3c42.ngrok.io"+'/wechat/jssdk/sign';
+	    // let path = location.href.split('#')[0];
+	    // let data = {url:path};
+	    // console.log("dom ready");
+	    // het.post(
+	    //         url,
+	    //         data,
+	    //         function(data,status){
+	    //
+	    //             //console.log("success hahahah: " + data);
+	    //             alert("success hahahah:"  + data +  " status:" + status);
+	    //             if(typeof data == 'string'){
+	    //                 data = JSON.parse(data);
+	    //             }
+	    //             var jsonData = data;
+	    //
+	    //             wx.config({
+	    //                     debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	    //                     appId: jsonData.appId, // 必填，公众号的唯一标识
+	    //                     timestamp: jsonData.timestamp, // 必填，生成签名的时间戳
+	    //                     nonceStr: jsonData.nonceStr, // 必填，生成签名的随机串
+	    //                     signature: jsonData.signature,// 必填，签名，见附录1
+	    //                     jsApiList: [
+	    //                         'openWXDeviceLib',
+	    //                         'onMenuShareAppMessage',
+	    //                         'getWXDeviceInfos',
+	    //                         'sendDataToWXDevice',
+	    //                         'startScanWXDevice',
+	    //                         'stopScanWXDevice',
+	    //                         'connectWXDevice',
+	    //                         'disconnectWXDevice',
+	    //                         'getWXDeviceTicket',
+	    //                         'onWXDeviceBindStateChange',
+	    //                         'onWXDeviceStateChange',
+	    //                         'onReceiveDataFromWXDevice',
+	    //                         'onScanWXDeviceResult',
+	    //                         'onWXDeviceBluetoothStateChange',
+	    //
+	    //                     ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	    //             });
+	    //         },
+	    //         function(msg){
+	    //             alert("req failed:"  + msg);
+	    //         }
+	    //     );
 	});
 
 	wx.ready(function () {
