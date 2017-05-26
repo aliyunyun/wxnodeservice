@@ -185,8 +185,16 @@
 
 	            return React.createElement(
 	                'div',
-	                { onTouchTap: this.handleTouchTap.bind(this) },
-	                '\u4F60\u597D\u5C0F\u658C\uFF0C\u6B22\u8FCE\u6765\u5230YY\u7684\u7F51\u7AD9\u3002'
+	                null,
+	                React.createElement(
+	                    'section',
+	                    null,
+	                    React.createElement(
+	                        'div',
+	                        { onTouchTap: this.handleTouchTap.bind(this) },
+	                        ' \u6D4B\u8BD5button\u62CD\u7167'
+	                    )
+	                )
 	            );
 	        }
 	    }]);
