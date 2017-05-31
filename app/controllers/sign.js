@@ -23,7 +23,7 @@ router.get('/jssdk/sign', function(req, res){
 
 router.post('/jssdk/sign', function(req, res){  
     
-   console.log("i get the jssdk sign post");
+console.log("i get the jssdk sign post");
      
 console.log("body: " + req.body.url);
 
@@ -60,15 +60,15 @@ console.log("body: " + req.body.url);
 });
 
 
-router.get('/', function(req, res){
-    checkToke(req, res);    
-});
+// router.get('/', function(req, res){
+//     checkToke(req, res);    
+// });
 
-router.post('/', function(req, res){
+// router.post('/', function(req, res){
 
-    console.log("start post !!!" + JSON.stringify(req.body)); 
-    checkToke(req, res);    
-});
+//     console.log("start post !!!" + JSON.stringify(req.body)); 
+//     checkToke(req, res);    
+// });
 
  function checkToke(req,res){  
 
@@ -93,37 +93,36 @@ function check(timestamp,nonce,signature,token){
 };  
 
 
-// router.get('/',    wechat(wechatConfig.infoList,wechat.text(function(message, req, res,next){
-//         console.log("start !!!");
+router.get('/',    wechat(wechatConfig.infoList,wechat.text(function(message, req, res,next){
+        console.log("start !!!");
         
-//         console.dir(message);
-//         res.reply();
-//  })));
+        console.dir(message);
+        res.reply();
+ })));
 
-//  router.post('/',    wechat(wechatConfig.infoList,wechat.text(function(message, req, res,next){
-//         console.log("post start !!!");
-//         console.dir(message);
-//         // res.reply("我知道了");
+ router.post('/',    wechat(wechatConfig.infoList,wechat.text(function(message, req, res,next){
+        console.log("post start !!!");
+        console.dir(message);
+        // res.reply("我知道了");
 
-//         res.reply([
-//             {
-//                 "title":"欢饮您来访问",
-//                 "description":"这个是YY的第一个调通了这个公众号的测试，。。。。。，这个是YY的第一个调通了这个公众号的测试，。。。。。，这个是YY的第一个调通了这个公众号的测试，。。。。。，",
-//                 "picurl":"http://www.rmzxb.com.cn/images/2017zt/20170514ydyl/bannner-0510.jpg",
-//                 "url":"http://www.baidu.com"
-//             }
-//         ])
-//     }).image(function(message, req, res, next){
-//             console.dir("这个是图片");
-//             console.dir(message);
+        res.reply([
+            {
+                "title":"欢饮您来访问",
+                "description":"这个是YY的第一个调通了这个公众号的测试，。。。。。，这个是YY的第一个调通了这个公众号的测试，。。。。。，这个是YY的第一个调通了这个公众号的测试，。。。。。，",
+                "picurl":"http://www.rmzxb.com.cn/images/2017zt/20170514ydyl/bannner-0510.jpg",
+                "url":"http://www.baidu.com"
+            }
+        ])
+    }).image(function(message, req, res, next){
+            console.dir("这个是图片");
+            console.dir(message);
 
-//             res.reply("我接受到图片了");
-//     }).location(function(message,req, res, next){
-//          console.dir("这个是位置信息");
-//             console.dir(message);
+            res.reply("我接受到图片了");
+    }).location(function(message,req, res, next){
+         console.dir("这个是位置信息");
+            console.dir(message);
 
-//             res.reply("我接收到位置信息了");
-//     })
+            res.reply("我接收到位置信息了");
+    })
  
- 
-//  ));
+ ));
