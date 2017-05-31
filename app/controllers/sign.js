@@ -66,7 +66,7 @@ router.get('/', function(req, res){
 
 router.post('/', function(req, res){
 
-      console.log("start post !!!"); 
+    console.log("start post !!!" + JSON.stringify(req.body)); 
     checkToke(req, res);    
 });
 
